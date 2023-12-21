@@ -7,8 +7,8 @@ public class QrDecodeManager : MonoSingleton<QrDecodeManager>
     public static event Action<Result> ReadQrResult;
     public static event Action<Sprite> LoadSprite;
 
-    private QRCodeReader qrCodeReader;
-    private SpriteBrowser spriteBrowser;
+    private IQRCodeReader qrCodeReader;
+    private ISpriteBrowser spriteBrowser;
     
     private void Start()
     {

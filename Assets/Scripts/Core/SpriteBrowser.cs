@@ -3,7 +3,7 @@ using System.Linq;
 using SFB;
 using UnityEngine;
 
-public class SpriteBrowser
+public class SpriteBrowser : ISpriteBrowser
 {
     public Sprite LoadedSprite { get; private set; }
 
@@ -16,7 +16,7 @@ public class SpriteBrowser
         LoadedSprite = !string.IsNullOrEmpty(path) ? CreateSpriteFromBytes() : null;
     }
 
-    private Sprite CreateSpriteFromBytes()
+    public Sprite CreateSpriteFromBytes()
     {
         Texture2D textureFromBytes = CreateTextureFromBytes();
 
@@ -24,7 +24,7 @@ public class SpriteBrowser
             new Vector2(textureFromBytes.width / 2f, textureFromBytes.height / 2f));
     }
 
-    private Texture2D CreateTextureFromBytes()
+    public Texture2D CreateTextureFromBytes()
     {
         byte[] fileContent = File.ReadAllBytes(path);
         Texture2D tex = new Texture2D(1, 1); // note that the size is overridden
@@ -34,4 +34,12 @@ public class SpriteBrowser
     }
 
     private void FillPath(string[] paths) => path = paths.Length == 0 ? string.Empty : paths.First();
+}
+
+public interface ISpriteBrowser
+{
+    void BrowseFile();
+    Sprite CreateSpriteFromBytes();
+    Texture2D CreateTextureFromBytes();
+    Sprite LoadedSprite { get;}
 }

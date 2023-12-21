@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using ZXing;
 
-public class QRCodeReader
+public class QRCodeReader: IQRCodeReader
 {
     private QrDecodeManager QrDecodeManager => QrDecodeManager.Instance;
     public Result Result { get; private set; }
@@ -24,7 +24,7 @@ public class QRCodeReader
             RGBLuminanceSource.BitmapFormat.RGBA32);
     }
 
-    private Texture2D ConvertSpriteToTexture2D(Sprite sprite)
+    public Texture2D ConvertSpriteToTexture2D(Sprite sprite)
     {
         Texture2D croppedTexture = new Texture2D((int)sprite.rect.width, (int)sprite.rect.height);
 
@@ -38,4 +38,11 @@ public class QRCodeReader
 
         return croppedTexture;
     }
+}
+
+public interface IQRCodeReader
+{
+    void ReadQrCode();
+    Texture2D ConvertSpriteToTexture2D(Sprite sprite);
+    Result Result { get; }
 }
