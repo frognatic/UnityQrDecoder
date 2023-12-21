@@ -24,7 +24,7 @@ public class QRCodeReader: IQRCodeReader
             RGBLuminanceSource.BitmapFormat.RGBA32);
     }
 
-    public Texture2D ConvertSpriteToTexture2D(Sprite sprite)
+    private Texture2D ConvertSpriteToTexture2D(Sprite sprite)
     {
         Texture2D croppedTexture = new Texture2D((int)sprite.rect.width, (int)sprite.rect.height);
 
@@ -43,6 +43,5 @@ public class QRCodeReader: IQRCodeReader
 public interface IQRCodeReader
 {
     void ReadQrCode();
-    Texture2D ConvertSpriteToTexture2D(Sprite sprite);
     Result Result { get; }
 }

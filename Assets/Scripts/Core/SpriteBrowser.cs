@@ -16,7 +16,7 @@ public class SpriteBrowser : ISpriteBrowser
         LoadedSprite = !string.IsNullOrEmpty(path) ? CreateSpriteFromBytes() : null;
     }
 
-    public Sprite CreateSpriteFromBytes()
+    private Sprite CreateSpriteFromBytes()
     {
         Texture2D textureFromBytes = CreateTextureFromBytes();
 
@@ -24,7 +24,7 @@ public class SpriteBrowser : ISpriteBrowser
             new Vector2(textureFromBytes.width / 2f, textureFromBytes.height / 2f));
     }
 
-    public Texture2D CreateTextureFromBytes()
+    private Texture2D CreateTextureFromBytes()
     {
         byte[] fileContent = File.ReadAllBytes(path);
         Texture2D tex = new Texture2D(1, 1); // note that the size is overridden
@@ -39,7 +39,5 @@ public class SpriteBrowser : ISpriteBrowser
 public interface ISpriteBrowser
 {
     void BrowseFile();
-    Sprite CreateSpriteFromBytes();
-    Texture2D CreateTextureFromBytes();
     Sprite LoadedSprite { get;}
 }
